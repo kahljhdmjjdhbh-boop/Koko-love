@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffe5ef">
+  <title>لخلوده وكوكو ♡</title>
+  <style>
+    :root{--pink:#ff6f9f;--deep:#a82d5c;--cream:#fff8fb;--ink:#4d2437}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:linear-gradient(160deg,#fff4f8,#ffe0ec 52%,#fff9fb);min-height:100vh;overflow-x:hidden}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .heart{position:absolute;bottom:-40px;opacity:.6;animation:floatUp linear forwards}
+    @keyframes floatUp{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+    .wrap{position:relative;z-index:1;width:min(720px,100%);margin:auto;padding:22px 16px 44px}
+    .panel{background:rgba(255,255,255,.82);border:1px solid rgba(255,111,159,.22);border-radius:28px;padding:24px;box-shadow:0 14px 45px rgba(168,45,92,.10);backdrop-filter:blur(8px)}
+    .center{text-align:center}
+    .eyebrow{color:var(--deep);font-weight:800;letter-spacing:.4px}
+    h1{font-size:clamp(2rem,8vw,3.2rem);line-height:1.25;margin:8px 0;color:var(--deep)}
+    h2{color:var(--deep);margin:0 0 12px;font-size:1.5rem}
+    p{line-height:1.95}
+    .big-heart{font-size:4rem;display:block;animation:pulse 1.5s infinite}
+    @keyframes pulse{50%{transform:scale(1.12)}}
+    .field{width:100%;padding:14px 16px;border:1px solid #f2b7cc;border-radius:15px;background:#fff;outline:none;margin:8px 0 12px}
+    .field:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ff6f9f25}
+    .btn{border:0;border-radius:999px;padding:13px 22px;background:linear-gradient(135deg,#ff8db4,#ef4f88);color:white;font-weight:800;box-shadow:0 8px 18px #ef4f8828}
+    .btn.secondary{background:#fff;color:var(--deep);border:1px solid #f3b7cc;box-shadow:none}
+    .btn:active{transform:scale(.98)}
+    .error{min-height:24px;color:#bd285d;font-size:.92rem}
+    .hidden{display:none!important}
+    .topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+    .tag{background:#ffe4ee;color:#a82d5c;padding:7px 12px;border-radius:999px;font-size:.86rem;font-weight:700}
+    .section{margin-top:16px}
+    .count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}
+    .count{padding:14px 6px;background:#fff0f6;border:1px solid #ffd1e1;border-radius:17px;text-align:center}
+    .count strong{display:block;font-size:clamp(1.3rem,5vw,2rem);color:var(--deep)}
+    .count span{font-size:.8rem;color:#8f536b}
+    .letter{background:#fffafc;border:1px dashed #f0a2bf;border-radius:20px;padding:18px;white-space:pre-line}
+    .memory{border-radius:20px;background:linear-gradient(135deg,#fff0f6,#fff);padding:18px;text-align:center}
+    .photo-preview{width:100%;max-height:360px;object-fit:cover;border-radius:18px;margin-top:12px}
+    .music-box{background:#fff0f6;border-radius:18px;padding:16px}
+    audio{width:100%;margin-top:10px}
+    .tiny{font-size:.82rem;color:#8c6474}
+    footer{text-align:center;padding:20px 8px;color:#9c5a75;font-size:.9rem}
+    .sparkle{font-size:1.3rem}
+    @media(max-width:420px){.panel{padding:19px;border-radius:23px}.count-grid{gap:5px}.count{padding:11px 3px}.count span{font-size:.72rem}}
+  </style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+<main class="wrap">
+  <section id="lock" class="panel center">
+    <span class="big-heart">💗</span>
+    <div class="eyebrow">رسالة سرّية مخصوصة ليكي</div>
+    <h1>كوكو 😂🥰</h1>
+    <p>فيه حد عاملِك مفاجأة صغيرة من قلبه…<br>بس الأول دخّلي كلمة السر يا قمر ✨</p>
+    <form id="unlockForm">
+      <input class="field center" id="password" type="password" inputmode="numeric" autocomplete="off" placeholder="كلمة السر هنا" aria-label="كلمة السر">
+      <button class="btn" type="submit">افتحي هديتك 💌</button>
+      <div class="error" id="error" aria-live="polite"></div>
+    </form>
+    <p class="tiny">من خلوده 😉😘 إلى كوكو بكل الحب ♡</p>
+  </section>
+
+  <section id="gift" class="hidden">
+    <div class="panel center">
+      <div class="topline"><span class="tag">خلوده ♡ كوكو</span><span class="tag">من 11 يونيو 2023</span></div>
+      <span class="big-heart">💖</span>
+      <div class="eyebrow">إلى أجمل كوكو في الدنيا</div>
+      <h1>إنتِ حتة من قلبي 🥹</h1>
+      <p>عملتلك المكان الصغير ده عشان كل ما تفتحيه تفتكري إن فيه قلب بيفرح لمجرد إنك موجودة في حياته.</p>
+      <button class="btn" id="surpriseBtn">دوسي هنا يا كوكو 💝</button>
+      <p id="surpriseText" class="hidden">المفاجأة الحقيقية مش في الموقع… المفاجأة إنك بقيتي ذكرى حلوة في كل يوم من أيامي، ولسه نفسي أعيش معاكي أيام أحلى بالحلال يا رب ❤️</p>
+    </div>
+
+    <section class="panel section center">
+      <h2>بقالنا قد إيه؟ ⏳</h2>
+      <p>وكل يوم بيعدّي بيزود مكانك في قلبي.</p>
+      <div class="count-grid" aria-label="عداد الأيام">
+        <div class="count"><strong id="days">—</strong><span>يوم</span></div>
+        <div class="count"><strong id="hours">—</strong><span>ساعة</span></div>
+        <div class="count"><strong id="minutes">—</strong><span>دقيقة</span></div>
+        <div class="count"><strong id="seconds">—</strong><span>ثانية</span></div>
+      </div>
+      <div class="tiny">بداية الحكاية: 11 / 06 / 2023</div>
+    </section>
+
+    <section class="panel section">
+      <h2 class="center">جواب صغير من خلوده 💌</h2>
+      <div class="letter" id="letter">يا كوكو بتاعتي 😂🥰❤️
+
+أنا مش أشطر واحد في الكلام، وساعات ممكن أسكت أو معرفش أعبّر زي ما إنتِ تستاهلي، بس ده عمره ما كان معناه إنك مش فارقة معايا. بالعكس، إنتِ من الناس اللي وجودهم بيهوّن اليوم وبيخلّي للحاجات الصغيرة معنى.
+
+بحب ضحكتك، وطريقتك، وتفاصيلك اللي يمكن إنتِ نفسك متاخديش بالك منها. وبحب إنك إنتِ، من غير ما تحتاجي تعملي أي حاجة عشان تثبتيلي قيمتك.
+
+نفسي أفضل سبب في ابتسامتك مش زعلك، وأتعلم أسمعك وأفهمك وأطمنك بالفعل قبل الكلام. وربنا يكتب لنا الخير، ويجمعنا في الحلال، وأقدر في يوم أقولك كل الكلام ده وأنا جاي أخطبك رسمي ❤️
+
+كل الحب ليكي يا كوكو،
+خلوده 😉😘</div>
+    </section>
+
+    <section class="panel section center">
+      <h2>ركن ذكرياتنا 📸</h2>
+      <p>اختار صورة من موبايلك تظهر هنا. الصورة بتفضل على جهازك ومش بتترفع لوحدها للموقع.</p>
+      <label class="btn secondary" for="photoInput">اختار صورة 💗</label>
+      <input class="hidden" id="photoInput" type="file" accept="image/*">
+      <img id="photoPreview" class="photo-preview hidden" alt="صورتكم المختارة">
+      <p class="tiny">لو هتنشر الموقع، الصورة اللي تختارها من هنا مش هتظهر عندها تلقائيًا؛ لازم تضيف الصورة لملفات الموقع قبل النشر.</p>
+    </section>
+
+    <section class="panel section">
+      <h2 class="center">أغنيتنا 🎶</h2>
+      <div class="music-box center">
+        <p>اختار ملف الأغنية من موبايلك واسمعه هنا.</p>
+        <label class="btn secondary" for="musicInput">اختار الأغنية 🎵</label>
+        <input class="hidden" id="musicInput" type="file" accept="audio/*">
+        <audio id="audioPlayer" controls class="hidden"></audio>
+        <p class="tiny">علشان الأغنية تشتغل عند كوكو كمان، ضيف ملف صوت مسموح لك باستخدامه للموقع قبل ما تنشره.</p>
+      </div>
+    </section>
+
+    <section class="panel section center">
+      <h2>آخر كلمة ❤️</h2>
+      <p>لو الدنيا زحمت علينا أو الكلام قلّ، افتكري إنك غالية، وإن فيه حد بيتمنى يشوفك مبسوطة وبيطلب من ربنا يجمعه بيكي على خير.</p>
+      <button class="btn" id="heartsBtn">املّي الشاشة قلوب 💕</button>
+    </section>
+  </section>
+  <footer>اتعمل بحب مخصوص لكوكو من خلوده ♡</footer>
+</main>
+<script>
+  // ملاحظة: كلمة المرور هنا للحماية اللطيفة فقط وليست حماية أمنية حقيقية.
+  const PASSWORD = "942006";
+  const startDate = new Date(2023, 5, 11, 0, 0, 0);
+  const lock = document.getElementById('lock');
+  const gift = document.getElementById('gift');
+  document.getElementById('unlockForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const value = document.getElementById('password').value.trim();
+    if (value === PASSWORD) {
+      lock.classList.add('hidden');
+      gift.classList.remove('hidden');
+      updateCounter();
+      setInterval(updateCounter, 1000);
+      burstHearts(18);
+    } else {
+      document.getElementById('error').textContent = 'مش دي كلمة السر يا كوكو 😂 جرّبي تاني ❤️';
+    }
+  });
+  function updateCounter(){
+    const diff = Math.max(0, Date.now() - startDate.getTime());
+    document.getElementById('days').textContent = Math.floor(diff / 86400000).toLocaleString('ar-EG');
+    document.getElementById('hours').textContent = Math.floor(diff / 3600000 % 24).toLocaleString('ar-EG');
+    document.getElementById('minutes').textContent = Math.floor(diff / 60000 % 60).toLocaleString('ar-EG');
+    document.getElementById('seconds').textContent = Math.floor(diff / 1000 % 60).toLocaleString('ar-EG');
+  }
+  document.getElementById('surpriseBtn').addEventListener('click', () => {
+    document.getElementById('surpriseText').classList.toggle('hidden');
+    burstHearts(25);
+  });
+  document.getElementById('heartsBtn').addEventListener('click', () => burstHearts(40));
+  function burstHearts(count){
+    const holder = document.getElementById('hearts');
+    const symbols = ['💗','💖','💕','💘','❤️','✨'];
+    for(let i=0;i<count;i++){
+      const el=document.createElement('span');
+      el.className='heart';
+      el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+      el.style.left=Math.random()*100+'%';
+      el.style.fontSize=(16+Math.random()*20)+'px';
+      el.style.animationDuration=(3+Math.random()*4)+'s';
+      holder.appendChild(el);
+      setTimeout(()=>el.remove(),7500);
+    }
+  }
+  setInterval(()=>burstHearts(1),1800);
+  document.getElementById('photoInput').addEventListener('change', e=>{
+    const file=e.target.files && e.target.files[0];
+    if(!file)return;
+    const img=document.getElementById('photoPreview');
+    img.src=URL.createObjectURL(file);
+    img.classList.remove('hidden');
+  });
+  document.getElementById('musicInput').addEventListener('change', e=>{
+    const file=e.target.files && e.target.files[0];
+    if(!file)return;
+    const player=document.getElementById('audioPlayer');
+    player.src=URL.createObjectURL(file);
+    player.classList.remove('hidden');
+    player.play().catch(()=>{});
+  });
+</script>
+</body>
+</html>
